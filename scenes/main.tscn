@@ -1,0 +1,291 @@
+[gd_scene load_steps=21 format=1]
+
+[ext_resource path="res://images/bg2.png" type="Texture" id=1]
+[ext_resource path="res://scripts/bintang1.gd" type="Script" id=2]
+[ext_resource path="res://images/star-icon.png" type="Texture" id=3]
+[ext_resource path="res://sound_coin.wav" type="Sample" id=4]
+[ext_resource path="res://scripts/.gd" type="Script" id=5]
+[ext_resource path="res://images/Robot-icon.png" type="Texture" id=6]
+[ext_resource path="res://scripts/muncul2.gd" type="Script" id=7]
+[ext_resource path="res://scenes/munculbintang.tscn" type="PackedScene" id=8]
+[ext_resource path="res://scripts/meteor1.gd" type="Script" id=9]
+[ext_resource path="res://images/Meteor-icon.png" type="Texture" id=10]
+[ext_resource path="res://scripts/munmeteor.gd" type="Script" id=11]
+[ext_resource path="res://scenes/munculmeteor.tscn" type="PackedScene" id=12]
+
+[sub_resource type="RectangleShape2D" id=1]
+
+custom_solver_bias = 0.0
+extents = Vector2( 518.472, 27.8567 )
+
+[sub_resource type="CircleShape2D" id=2]
+
+custom_solver_bias = 0.0
+radius = 10.0
+
+[sub_resource type="SampleLibrary" id=3]
+
+samples/sound_coin = { "db":0.0, "pitch":1.0, "sample":ExtResource( 4 ) }
+samples/sound_coin_1 = { "db":0.0, "pitch":1.0, "sample":ExtResource( 4 ) }
+
+[sub_resource type="ConvexPolygonShape2D" id=4]
+
+custom_solver_bias = 0.0
+points = Vector2Array( 569.926, 495.605, 577.224, 471.059, 576.56, 524.796 )
+
+[sub_resource type="ConvexPolygonShape2D" id=5]
+
+custom_solver_bias = 0.0
+points = Vector2Array( 535.428, 524.132, 534.102, 473.712, 546.707, 495.605 )
+
+[sub_resource type="ConvexPolygonShape2D" id=6]
+
+custom_solver_bias = 0.0
+points = Vector2Array( 576.56, 524.796, 535.428, 524.132, 546.707, 495.605, 569.926, 495.605 )
+
+[sub_resource type="RectangleShape2D" id=7]
+
+custom_solver_bias = 0.0
+extents = Vector2( 10, 10 )
+
+[sub_resource type="CircleShape2D" id=8]
+
+custom_solver_bias = 0.0
+radius = 22.839
+
+[node name="main" type="Node2D"]
+
+[node name="bg" type="Sprite" parent="."]
+
+transform/pos = Vector2( 513.401, 300.581 )
+transform/scale = Vector2( 1.6253, 1.61774 )
+texture = ExtResource( 1 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+anchor_mode = 1
+rotating = false
+current = false
+zoom = Vector2( 1, 1 )
+limit/left = -10000000
+limit/top = -10000000
+limit/right = 10000000
+limit/bottom = 10000000
+drag_margin/h_enabled = true
+drag_margin/v_enabled = true
+smoothing/enable = false
+smoothing/speed = 5.0
+drag_margin/left = 0.2
+drag_margin/top = 0.2
+drag_margin/right = 0.2
+drag_margin/bottom = 0.2
+
+[node name="ground" type="StaticBody2D" parent="."]
+
+editor/display_folded = true
+transform/pos = Vector2( 536.679, 573.692 )
+input/pickable = false
+shapes/0/shape = SubResource( 1 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, -22.6968, -44.1516 )
+shapes/0/trigger = false
+collision/layers = 1
+collision/mask = 1
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ground"]
+
+transform/pos = Vector2( -22.6968, -44.1516 )
+shape = SubResource( 1 )
+trigger = false
+_update_shape_index = 0
+
+[node name="bintang" type="RigidBody2D" parent="." groups=[ "bintang2" ]]
+
+input/pickable = false
+shapes/0/shape = SubResource( 2 )
+shapes/0/transform = Matrix32( 2.09756, 0, 0, 2.02271, 431.46, 77.128 )
+shapes/0/trigger = false
+collision/layers = 1
+collision/mask = 1
+mode = 0
+mass = 1.0
+friction = 1.0
+bounce = 0.0
+gravity_scale = 1.0
+custom_integrator = false
+continuous_cd = 0
+contacts_reported = 1
+contact_monitor = true
+sleeping = false
+can_sleep = true
+velocity/linear = Vector2( 0, 0 )
+velocity/angular = 0.0
+damp_override/linear = -1.0
+damp_override/angular = -1.0
+script/script = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="bintang"]
+
+transform/pos = Vector2( 432.422, 74.2322 )
+texture = ExtResource( 3 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="bintang"]
+
+transform/pos = Vector2( 431.46, 77.128 )
+transform/scale = Vector2( 2.09756, 2.02271 )
+shape = SubResource( 2 )
+trigger = false
+_update_shape_index = 0
+
+[node name="SamplePlayer2D" type="SamplePlayer2D" parent="bintang"]
+
+params/volume_db = 0.0
+params/pitch_scale = 1.0
+params/attenuation/min_distance = 1.0
+params/attenuation/max_distance = 2048.0
+params/attenuation/distance_exp = 1.0
+config/polyphony = 1
+config/samples = SubResource( 3 )
+config/pitch_random = 0.0
+
+[node name="robot" type="RigidBody2D" parent="."]
+
+transform/pos = Vector2( -28.7078, -65.6681 )
+input/pickable = false
+shapes/0/shape = SubResource( 4 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+shapes/1/shape = SubResource( 5 )
+shapes/1/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/1/trigger = false
+shapes/2/shape = SubResource( 6 )
+shapes/2/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/2/trigger = false
+collision/layers = 1
+collision/mask = 1
+mode = 0
+mass = 1.0
+friction = 1.0
+bounce = 0.0
+gravity_scale = 0.0
+custom_integrator = false
+continuous_cd = 0
+contacts_reported = 0
+contact_monitor = false
+sleeping = false
+can_sleep = true
+velocity/linear = Vector2( 0, 0 )
+velocity/angular = 0.0
+damp_override/linear = -1.0
+damp_override/angular = -1.0
+script/script = ExtResource( 5 )
+
+[node name="Sprite" type="Sprite" parent="robot"]
+
+visibility/opacity = 10.0
+transform/pos = Vector2( 556.627, 520.218 )
+transform/rot = 1.0
+transform/scale = Vector2( 2.20204, 2.15009 )
+texture = ExtResource( 6 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="robot"]
+
+build_mode = 0
+polygon = Vector2Array( 534.102, 473.712, 535.428, 524.132, 576.56, 524.796, 577.224, 471.059, 569.926, 495.605, 546.707, 495.605 )
+shape_range = Vector2( 0, 2 )
+trigger = false
+
+[node name="Area2D" type="Area2D" parent="robot"]
+
+input/pickable = true
+shapes/0/shape = SubResource( 7 )
+shapes/0/transform = Matrix32( 3.34504, 0, 0, 4.41378, 554.222, 517.929 )
+shapes/0/trigger = false
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="robot/Area2D"]
+
+transform/pos = Vector2( 554.222, 517.929 )
+transform/scale = Vector2( 3.34504, 4.41378 )
+shape = SubResource( 7 )
+trigger = false
+_update_shape_index = 0
+
+[node name="muncul" type="Node2D" parent="."]
+
+script/script = ExtResource( 7 )
+delay = 1
+munculbintang = ExtResource( 8 )
+
+[node name="meteor" type="RigidBody2D" parent="." groups=[ "meteor2" ]]
+
+editor/display_folded = true
+input/pickable = false
+shapes/0/shape = SubResource( 8 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 597.488, 98.738 )
+shapes/0/trigger = false
+collision/layers = 1
+collision/mask = 1
+mode = 0
+mass = 1.0
+friction = 1.0
+bounce = 0.0
+gravity_scale = 1.0
+custom_integrator = false
+continuous_cd = 0
+contacts_reported = 1
+contact_monitor = true
+sleeping = false
+can_sleep = true
+velocity/linear = Vector2( 0, 0 )
+velocity/angular = 0.0
+damp_override/linear = -1.0
+damp_override/angular = -1.0
+script/script = ExtResource( 9 )
+
+[node name="Sprite" type="Sprite" parent="meteor"]
+
+transform/pos = Vector2( 598.893, 89.434 )
+transform/scale = Vector2( 1.83778, 1.72575 )
+texture = ExtResource( 10 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="meteor"]
+
+transform/pos = Vector2( 597.488, 98.738 )
+shape = SubResource( 8 )
+trigger = false
+_update_shape_index = 0
+
+[node name="muncul2" type="Node2D" parent="."]
+
+script/script = ExtResource( 11 )
+delay = 3
+munculmeteor = ExtResource( 12 )
+
+[node name="scores" type="RichTextLabel" parent="."]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 40.0
+margin/bottom = 40.0
+bbcode/enabled = true
+bbcode/bbcode = ""
+visible_characters = -1
+
+[connection signal="body_enter" from="bintang" to="bintang" method="_on_bintang_body_enter"]
+
+[connection signal="body_enter" from="robot/Area2D" to="robot" method="_on_Area2D_body_enter"]
+
+[connection signal="body_enter" from="meteor" to="meteor" method="_on_meteor_body_enter"]
+
+

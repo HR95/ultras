@@ -1,0 +1,51 @@
+[gd_scene load_steps=4 format=1]
+
+[ext_resource path="res://scripts/bintang1.gd" type="Script" id=1]
+[ext_resource path="res://images/star-icon.png" type="Texture" id=2]
+
+[sub_resource type="CircleShape2D" id=2]
+
+custom_solver_bias = 0.0
+radius = 10.0
+
+[node name="bintang" type="RigidBody2D"]
+
+input/pickable = false
+shapes/0/shape = SubResource( 2 )
+shapes/0/transform = Matrix32( 2.09756, 0, 0, 2.02271, 367.46, 102.128 )
+shapes/0/trigger = false
+collision/layers = 1
+collision/mask = 1
+mode = 0
+mass = 1.0
+friction = 1.0
+bounce = 0.0
+gravity_scale = 1.0
+custom_integrator = false
+continuous_cd = 0
+contacts_reported = 1
+contact_monitor = true
+sleeping = false
+can_sleep = true
+velocity/linear = Vector2( 0, 0 )
+velocity/angular = 0.0
+damp_override/linear = -1.0
+damp_override/angular = -1.0
+script/script = ExtResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+
+transform/pos = Vector2( 366.422, 96.2322 )
+texture = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+transform/pos = Vector2( 367.46, 102.128 )
+transform/scale = Vector2( 2.09756, 2.02271 )
+shape = SubResource( 2 )
+trigger = false
+_update_shape_index = 0
+
+[connection signal="body_enter" from="." to="." method="_on_bintang_body_enter"]
+
+
